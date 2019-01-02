@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dani & Caio</title>
+	<link rel="stylesheet" type="text/css" href="main.css" >
+	<link rel="shortcut icon" href="Graphicloads-100-Flat-Heart-favourite.ico">
+	<script type="text/javascript" src="jquery-1.11.1.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script type="text/javascript" src="jquery.nicescroll.js"></script>
+	<script src="buttonup.js"></script>
+	<script>
+		$(document).ready(function () {
+			var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+			var firstDate = new Date(2015,4,9);
+			var secondDate = new Date();
+			var classes=document.getElementsByClassName("dias");
+			var diffDays = Math.round((firstDate.getTime() - secondDate.getTime()) / (oneDay))+1;
+			if(diffDays > 1)for(var i= 0;i<classes.length;i++) classes[i].innerHTML="Faltam "+diffDays+" dias";
+			else if(diffDays == 1)for(var i= 0;i<classes.length;i++) classes[i].innerHTML="Falta "+diffDays+" dia!";
+			else if(diffDays == 0)for(var i= 0;i<classes.length;i++) classes[i].innerHTML="O grande Dia!";
+			else{
+				diffDays*=-1;
+				for(var i= 0;i<classes.length;i++) classes[i].innerHTML = "Foi h&aacute " + diffDays + " dias";
+			}
+
+		});
+	</script>
+
+	<script>
+	 $(function() {
+	 	$('a[href*=#]:not([href=#])').click(function() {
+		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+
+		  var target = $(this.hash);
+		  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		  if (target.length) {
+			$('html,body').animate({
+			  scrollTop: target.offset().top
+			}, 500);
+			return false;
+		  }
+		}
+	  });
+	});
+	</script>
+
+	<script>
+		function initialize() {
+			var mapCanvas = document.getElementById('map-box');
+			var mapOptions = {
+				center: new google.maps.LatLng(-23.537962, -46.726874),
+				zoom: 15,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			var map = new google.maps.Map(mapCanvas, mapOptions);
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(-23.537962, -46.726874),
+				map: map,
+				title:"Espaço Gardens",
+				animation: google.maps.Animation.DROP
+			});
+
+			var infowindow = new google.maps.InfoWindow({
+				content:'<h3><b>Espa&ccedil;o Gardens</b></h3>'+
+					'<h4>Av. Queiroz Filho, 830 Vila Leopoldina S&atilde;o Paulo - SP</h4>',
+				animation: google.maps.Animation.DROP
+			});
+
+
+			function ShowMarker(){
+
+				infowindow.open(map,marker);
+			}
+
+			google.maps.event.addListener(marker, 'click', ShowMarker());
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+
+
+	<script>
+		$(document).ready(function() {
+			$('#smallmenu').hide();
+			$("#music").hide();
+			$(window).resize(function(){
+				if($(window).width()>1270)$("#smallmenu").hide();
+
+			});
+			$('body').niceScroll({
+				autohidemode: false,
+				cursorborderradius: '0px',
+				background: '#E5E9E7',
+				cursorwidth: '10px',
+				cursorcolor: '#999999',
+				scrollspeed: 50,
+				mousescrollstep:100,
+				zindex:1001
+			});
+
+
+
+
+		});
+		function toggleMenu(){
+			$("#smallmenu").slideToggle("slow");
+		}
+		function showMusic(){
+			$("#music").fadeIn();
+			document.getElementById("music").volume=0.3;
+			document.getElementById("music").play();
+		}
+
+		window.addEventListener("load",function(){
+
+
+
+			$("#loading-page").fadeOut(1500,function(){
+				$("#loading-page").remove();
+
+			});
+
+		});
+
+	</script>
+
+
+
+	
+	
+	
+	
+	
+</head>
+<body style='font-family:"bariol-regular"'>
+	<!--
+	<div style="display: none" id="loading-page">
+		<h1>Carregando</h1>
+		<img id="loading-icon" src="images/loading-icon.png">
+	</div>
+	-->
+	<nav class="header" style="text-align:center" id="biglist">
+		<ul>
+			<li><a href="#a-historia" class="button" ><p> A Hist&oacuteria </p></a></li>
+			<li><a href="#os-noivos" class="button" ><p> Os noivos </p></a></li>
+			<li><a href="#padrinhos-e-madrinhas" class="button" ><p> Padrinhos/ Madrinhas </p></a></li>
+			<li id="logo"><a href="#inicio"><img src="images/logo.png" height="90px" width="auto"/></a></li>
+			<li><a href="#evento" class="button" ><p> O Grande Dia <br>(RSVP) </p></a></li>
+			<li><a href="#dicas" class="button" ><p> Nossas Dicas </p></a></li>
+			<li><a href="#lista" class="button" ><p> Lista de Presentes </p></a></li>
+		</ul>
+	</nav>
+	<nav class="header" style="height: 50px" id="smalllist">
+		<img id="smalllogo" src="images/Logo-small.png" height="75px">
+		<button onclick="toggleMenu()"></button>
+	</nav>
+	<div id="smallmenu">
+		<div class="nav-table">
+			<div class="nav-row">
+				<a href="#a-historia"><p> A Hist&oacuteria </p></a>
+				<a href="#os-noivos"><p> Os noivos </p></a>
+				<a href="#padrinhos-e-madrinhas"><p> Padrinhos/ Madrinhas </p></a>
+			</div>
+			<div class="nav-row">
+				<a href="#evento"><p> O Grande Dia (RSVP) </p></a>
+				<a href="#dicas"><p> Nossas Dicas </p></a>
+				<a href="#lista"><p> Lista de Presentes </p></a>
+			</div>
+		</div>
+	</div>
+	<div class="instagram-gallery" tabindex="0">
+
+
+	</div>
+	<h5 id="hashtag">#daniecaio2015</h5>
+	<a id="upbutton" href="#inicio"></a>
+	<section class="module parallax parallax-1" id="inicio">
+	  <div class="img-container">
+		  <div id="top-date" class="faixa" style="position: fixed;bottom: 20px;right: 0;left: 0;z-index: 900"><p class="dias"></p></div>
+	  </div>
+	</section>
+
+	<section class="module content" id="a-historia">
+
+
+		<h2 id="p_historia" >A Hist&oacuteria</h2>
+
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle1"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>Maio/1986</h1>
+						<p>Aproximadamente 29 anos antes da data do casamento, nascia o Caio... em Salvador. Sim! Para aqueles que pensavam que o Caio era apenas outro carioca morando em S&atilde;o Paulo, saibam que ele na verdade &eacute; um baiano (com sotaque carioca) morando em S&atilde;o Paulo!</p>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>Janeiro/1987</h1>
+						<p>Logo depois nascia a Daniela, em S&atilde;o Paulo. Caso voc&ecirc;s n&atilde;o estejam reconhecendo ela na foto, tentem procurar pelas bochechas...</p>
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle2"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle3"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>1986-2004</h1>
+						<p>Caio passou maior parte de sua inf&acirc;ncia e adolesc&ecirc;ncia no Rio de Janeiro. Torcedor fan&aacute;tico do Flamengo, Caio adorava frequentar o Maraca com seu irm&atilde;o e pai. Caio tamb&eacute;m j&aacute; teve seus dias de jogador de basquete e de guitarrista de uma banda de Rock. Quem diria?</p>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>1987-2004</h1>
+						<p>J&aacute; a Daniela cresceu em S&atilde;o Paulo. Neta de imigrantes japoneses no Brasil, Daniela cultivou ao longo da sua inf&acirc;ncia uma paix&atilde;o pela culin&aacute;ria oriental... e tamb&eacute;m brasileira, francesa, mexicana, italiana. &Eacute;, de maneira geral, essa japinha adora comer!</p>
+
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle4"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle5"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>2005</h1>
+						<p>Ainda n&atilde;o foi quando Caio decidiu se mudar para o estado de S&atilde;o Paulo para a faculdade que os noivos se conheceram. Apesar de mais pr&oacute;ximos no mapa, Caio estudava engenharia aeron&aacute;utica no ITA, em S&atilde;o Jos&eacute; dos Campos...</p>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>2005</h1>
+						<p>... Enquanto isso, Daniela come&ccedil;ava seu curso de Engenharia de Produ&ccedil;&atilde;o na Poli, na capital.</p>
+
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle6"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle7"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>2009-2010</h1>
+						<p>Os caminhos de Caio e Daniela come&ccedil;aram a tomar rumos comuns quando ambos foram estudar na Fran&ccedil;a na mesma &eacute;poca. S&oacute; que ela foi para Paris...</p>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>2009-2010</h1>
+						<p>... e ele para Toulouse. Faltava pouco para se cruzarem!</p>
+
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle8"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle9"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>2009-2010</h1>
+						<p>Foi durante a estadia de ambos na Fran&ccedil;a que Caio e Daniela se conheceram! Por contato de amigo em comum, Caio e Daniela finalmente estavam juntos em uma mesma "soir&eacute;e" em um bar em Paris. Mas n&atilde;o foi neste dia que o amor come&ccedil;ou... Segundo ela: "ele namorava", e segundo ele: "ela nem olhou pra mim".</p>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>Fevereiro/2011</h1>
+						<p>Com ambos j&aacute; de volta em solo brasileiro, e agora formados, seus caminhos voltariam a se cruzar em uma festinha de anivers&aacute;rio de uma amiga em comum. Quis a sorte que os dois se sentassem um de frente para o outro...</p>
+
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle10"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle11"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>Abril/2011</h1>
+						<p>Entre barzinhos e restaurantes, Daniela e Caio come&ccedil;aram a sair juntos mais frequentemente e se conhecer melhor. Na cerim&ocirc;nia de formatura da Daniela, veio o primeiro beijo.</p>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>Junho/2011</h1>
+						<p>Em seguida, veio a primeira viagem...</p>
+
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle12"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle13"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>2011-2013</h1>
+						<p>... primeira de muitas, &eacute; claro</p>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>Novembro/2013</h1>
+						<p>Depois de alguns anos e muitos sorrisos juntos, o Caio finalmente conseguiu fazer a Daniela chorar... Mas foi por uma boa causa. Ela disse sim!</p>
+
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle14"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="hist-container">
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-image l circle15"></div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-text r">
+						<h1>2014</h1>
+						<p>Caio e Daniela se divertiram muito organizando a festa que est&aacute; por vir!</p>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="hist-row">
+				<div class="h-left">
+					<div class="h-text l">
+						<h1>2015 - futuro</h1>
+						<p>O futuro ser&aacute; de muitas boas novidades! Com mudan&ccedil;a para os EUA j&aacute; agendada, Caio voltar&aacute; aos estudos e Daniela vai em busca de um sonho antigo!</p>
+
+					</div>
+				</div>
+				<div class="vertical-line"></div>
+				<div class="h-right">
+					<div class="h-image r circle16"></div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<section class="module parallax parallax-6">
+		<div class="img-container">
+
+		</div>
+	</section>
+
+	<section class="module content" id="os-noivos">
+		<div class="container" style="margin-top: 70px;margin-bottom: 70px">
+			<h2>Os noivos</h2>
+			<div class="vertical-line" style="height: 93%"></div>
+			<div class="one-row big-row">
+
+
+
+
+			<div class="n-box ntextb">
+				<div style="min-height: 500px">
+
+					<h1>Caio by Dani...</h1>
+					<p><b>O Caio adora</b> o personagem Jack Bauer, o guitarrista Richie Kotzen, o musical the Book of Mormon e a C&oacute;rsega...  a probabilidade dele tocar em um desses temas em uma conversa aleat&oacute;ria &eacute; de 100%!</p>
+					<p><b>O Caio detesta</b> ver o Flamengo perder pro Vasco, ligar para a NET, dias inteiros de compras em outlets, cobras e tubar&otilde;es</p>
+
+					<p><b>O que eu mais amo no Caio</b> &eacute; a humildade e generosidade dele, mesmo ele sendo absurdamente excepcional em tudo que ele quer..!</p>
+
+					<p><b>Voc&ecirc; se surpreenderia ao saber que o Caio</b> &eacute; um &oacute;timo desenhista e imita muito bem as pessoas! Ele tem esse jeito bonzinho e desligado, mas ele est&aacute; observando seus trejeitos nos m&iacute;nimos detalhes e sabe te imitar muito bem!</p>
+
+					<p><b>O Caio adora quando eu</b> cozinho gohan, pur&ecirc; e salsicha!</p>
+				</div>
+
+			</div>
+
+			<div class="n-box nbride"></div>
+
+			<div class="n-box ngroom"></div>
+
+			<div class="n-box ntextg">
+
+				<h1>Dani by Caio...</h1>
+				<p><b>A Dani adora</b> pic-nics, qualquer tipo de cama, desbravar restaurantes, jantar com amigos</p>
+
+				<p><b>A Dani detesta</b> filmes de terror, videogames individuais e trabalhar no domingo</p>
+
+				<p><b>O que eu mais amo na Dani</b> &eacute; o carinho e empenho que ela coloca em tudo que ela faz... ah, em segundo lugar, as bochechas dela!</p>
+
+				<p><b>Voc&ecirc; se surpreenderia ao saber que a Dani</b> n&atilde;o consegue pular! S&eacute;rio, &eacute; incr&iacute;vel. N&atilde;o pula nem 3 dedos.</p>
+
+				<p><b>A Dani adora quando eu</b> lavo a lou&ccedil;a, e arrumo a cama (come&ccedil;o a achar que ela faz bagun&ccedil;a a mais de prop&oacute;sito...)</p>
+
+
+			</div>
+
+
+		</div>
+		<div class="one-row small-rows" >
+
+
+
+
+			<div class="n-box ntextb">
+				<div>
+
+					<h1>Caio by Dani...</h1>
+					<p><b>O Caio adora</b> o personagem Jack Bauer, o guitarrista Richie Kotzen, o musical the Book of Mormon e a C&oacute;rsega...  a probabilidade dele tocar em um desses temas em uma conversa aleat&oacute;ria &eacute; de 100%!</p>
+					<p><b>O Caio detesta</b> ver o Flamengo perder pro Vasco, ligar para a NET, dias de outlets e cobras</p>
+
+					<p><b>O que eu mais amo no Caio</b> &eacute; a humildade e generosidade dele, mesmo ele sendo absurdamente excepcional em tudo que ele quer..!</p>
+
+					<p><b>Voc&ecirc; se surpreenderia ao saber que o Caio</b> &eacute; um &oacute;timo desenhista e imita muito bem as pessoas! Ele tem esse jeito bonzinho e desligado, mas ele est&aacute; observando seus trejeitos nos m&iacute;nimos detalhes e sabe te imitar muito bem!</p>
+
+					<p><b>O Caio adora</b> quando eu cozinho gohan, pur&ecirc; e salsicha!</p>
+				</div>
+
+			</div>
+
+			<div class="n-box nbride"></div>
+
+
+
+
+		</div>
+		<div class="one-row small-rows">
+				<div class="n-box ngroom"></div>
+
+				<div class="n-box ntextg">
+
+					<h1>Dani by Caio...</h1>
+					<p><b>A Dani adora</b> pic-nics, qualquer tipo de cama, desbravar restaurantes, jantar com amigos</p>
+
+					<p><b>A Dani detesta</b> filmes de terror, videogames individuais e trabalhar no domingo</p>
+
+					<p><b>O que eu mais amo na Dani</b> &eacute; o carinho e empenho que ela coloca em tudo que ela faz... ah, em segundo lugar, as bochechas dela!</p>
+
+					<p><b>Voc&ecirc; se surpreenderia ao saber que a Dani</b> n&atilde;o consegue pular! S&eacute;rio, &eacute; incr&iacute;vel. N&atilde;o pula nem 3 dedos.</p>
+
+					<p><b>A Dani adora</b> quando eu lavo a lou&ccedil;a, e arrumo a cama (come&ccedil;o a achar que ela faz bagun&ccedil;a a mais de prop&oacute;sito...)</p>
+
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	
+	<section class="module parallax parallax-2">
+	  <div class="img-container">
+
+	  </div>
+	</section>
+
+	<section class="module content" id="padrinhos-e-madrinhas">
+		<h2>Padrinhos e Madrinhas</h2>
+
+		<div class="bests-row">
+
+			<div class="left">
+
+				<div class="box bbride">
+					<div class="bests-image bests1"></div>
+					<div class="bests-text">
+						<h1>Fabi e Gus</h1>
+						<b></b>
+						<p><i>"Lembro do 1o dia em que o Gus foi buscar a Fabi em casa... Eu n&atilde;o o conheci nesse dia porque n&atilde;o o deixei subir no apartamento, afinal de contas, eu estava de pijama e sem condi&ccedil;&otilde;es de me deparar com um estranho na sala! Coitado, al&eacute;m do porteiro cancelar a subida dele, ele ainda acabou cruzando com o meu pai que tinha descido para pegar comida...&#160; rs Ainda bem que o relacionamento deles foi longe, e depois de tantos bons momentos que passamos juntos, hoje ate deixamos o Gus subir no apartamento sem ser anunciado!"</i></p>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="vertical-line" style="height: 600px"></div>
+			<div class="right">
+
+				<div class="box bgroom">
+					<div class="bests-image bests2"></div>
+					<div class="bests-text">
+						<h1>Ciro e Isabela</h1>
+
+						<p><i>"Cir&atilde;o &eacute; meu eterno partner in crime. Pe&ccedil;am para ele contar da vez que tomamos ovada na cabe&ccedil;a, fomos roubados pelo padeiro, e ainda quebramos a l&acirc;mpada do pr&eacute;dio onde mor&aacute;vamos &ndash; tudo em um mesmo dia. True story! Ainda bem que a Isa deu um jeito nele e hoje ele est&aacute; mais comportado "</i></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<div class="bests-row">
+
+
+			<div class="left">
+
+				<div class="box bbride">
+					<div class="bests-image bests3"></div>
+					<div class="bests-text">
+						<h1>Gabu</h1>
+						<b></b>
+						<p><i>"A Gabu foi a minha primeira melhor amiga! Nos conhecemos na 6a serie, quando ela ainda era a Gabi, e desde ent&atilde;o n&atilde;o desgrudamos mais..! Passamos por toda a evolu&ccedil;&atilde;o juntas, de paixonite por backstreet boys at&eacute; o primeiro (e segundo, e terceiro....) emprego! E agora tenho super orgulho de ter essa medica-coreana-que-le-japones-e-nao-despensa-uma-piscina-ou-carninha do meu lado no altar! "</i></p>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="vertical-line" style="height: 600px"></div>
+			<div class="right">
+
+				<div class="box bgroom">
+					<div class="bests-image bests4"></div>
+					<div class="bests-text">
+						<h1>Leonice e Felipe</h1>
+
+						<p><i>"Lembro at&eacute; hoje do dia que abrigamos o Sem Teto (ops, o Felipe), no glorioso ap&ecirc; 311. Demos a ele comida, banho e roupa e at&eacute; ensinamos ele a falar. Alguns anos depois tive o prazer de ser padrinho de casamento deste casal fenomenal"</i></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<div class="bests-row">
+
+
+			<div class="left">
+
+				<div class="box bbride">
+					<div class="bests-image bests5"></div>
+					<div class="bests-text">
+						<h1>Mai e Hugo</h1>
+						<b></b>
+						<p><i>" A Mai entrou na minha vida na 8a serie, e na vida do Caio 9 anos depois quando ele inocentemente se disp&ocirc;s a dar uma carona no r&eacute;veillon para uma recem-conhecida..&#160; Afinal de contas, "Riviera &eacute; super no caminho entre S&atilde;o Paulo e Ubatuba!" Foram 5 horas de viagem at&eacute; Riviera, e depois mais 7 horas at&eacute; Ubatuba! Pelo menos foi um investimento que valeu a pena! Por causa dessa viagem, o Caio foi convidado para o aniversario dela 2 meses depois, onde eu e o Caio come&ccedil;amos a nossa historia...! :)"</i></p>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="vertical-line" style="height: 600px"></div>
+			<div class="right">
+
+				<div class="box bgroom">
+					<div class="bests-image bests6"></div>
+					<div class="bests-text">
+						<h1>Marcello</h1>
+
+						<p><i>"Quando &eacute;ramos menores, teve uma vez que o Marcello me pagou 10 reais para ser seu amigo. Senti peninha dele e aceitei. No fim, at&eacute; que ele era gente boa."</i></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<div class="bests-row">
+
+
+			<div class="left">
+
+				<div class="box bbride">
+					<div class="bests-image bests7"></div>
+					<div class="bests-text">
+						<h1>Andr&eacute, F&eacute;lix e Gui</h1>
+						<b></b>
+						<p><i>"Eu sempre fui marcante na vida desses 3 mosqueteiros amigos do col&eacute;gio.. Nunca vou me esquecer de quando eu ensinei o F&eacute;lix a ser piloto, ou de quando eu deixei o Andr&eacute; ganhar no Presidente ou de quando eu desejei toda a felicidade do mundo pro Gui (e ele ficou aplicando isso todo dia ao p&eacute; da letra, at&eacute; hoje!) :D"</i></p>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="vertical-line" style="height: 600px"></div>
+			<div class="right">
+
+				<div class="box bgroom">
+					<div class="bests-image bests8"></div>
+					<div class="bests-text">
+						<h1>Ju Perlin</h1>
+						<b></b>
+						<p><i>"Poucos sabem disso, mas quem escolheu a data do nosso casamento foi a Ju Perlin. Para voc&ecirc;s verem como essa menina &eacute; importante pra gente"</i></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<div class="bests-row">
+
+
+			<div class="left">
+
+				<div class="box bbride">
+					<div class="bests-image bests9"></div>
+					<div class="bests-text">
+						<h1>D&eacuteia</h1>
+						<b></b>
+						<p><i>"A Deia &eacute; a minha prima da minha idade que sempre foi minha c&uacute;mplice em muitas disputas... principalmente nos jogos e compl&ocirc;s contra nossos irm&atilde;os mais velhos..! (Bia e Ro, no hard feelings! rs) Foram muitas f&eacute;rias entre S&atilde;o Paulo e Bauru construindo casas, conquistando continentes, desenhando Pessoas/Lugares/Animais, fazendo trufas, criando blogs... e agora casando! "</i></p>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="vertical-line" style="height: 600px"></div>
+			<div class="right">
+
+				<div class="box bgroom">
+					<div class="bests-image bests10"></div>
+					<div class="bests-text">
+						<h1>Baiacu e Raquel</h1>
+						<b></b>
+						<p><i>"No ITA, o Raquel ficava acordado a noite inteira para garantir que (ele) eu n&atilde;o perdesse o hor&aacute;rio da aula. Caso isso falhasse, eu sempre podia contar com o Baiacu e seu <button class="music-button" onclick="showMusic()">despertador eficiente</button>"</i></p>
+						<audio controls id="music" preload="none">
+
+							<source src="sounds/despertador.mp3" type="audio/mpeg">
+							Your browser does not support the audio element.
+						</audio>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="bests-row">
+
+
+			<div class="left">
+
+				<div class="box bbride">
+					<div class="bests-image bests11"></div>
+					<div class="bests-text">
+						<h1>Ju Zayat e Monise</h1>
+						<b></b>
+						<p><i>"A Ju e a Monise s&atilde;o as minhas amigas chiques.. nos conhecemos em Paris (uh la la!), e vivemos juntas muitos pic nics, soir&eacute;es, Chez Gladines, Chez mois, RERs, TGVs, mouffetards, bals de pompiers, etc. e etc. e etc. La&ccedil;os que s&oacute; quem viveu na Fran&ccedil;a entende..! :D"</i></p>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="vertical-line" style="height: 520px"></div>
+			<div class="right">
+
+				<div class="box bgroom">
+					<div class="bests-image bests12"></div>
+					<div class="bests-text">
+						<h1>Samara</h1>
+						<b></b>
+						<p><i>"A Samara &eacute; a &uacute;nica pessoa que conseguiu me arrastar para um show da Cl&aacute;udia Leitte. Com um poder que s&oacute; ela tem, ela ainda conseguiu fazer o Baiacu extravasar, liberar e jogar tudo pro ar (juro!)"</i></p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
+
+	</section>
+
+	<section class="module parallax parallax-3">
+	  <div class="img-container">
+		
+	  </div>
+	</section>
+
+	<section class="module content" id="evento">
+	  <div class="container" style="padding: 0 10%;position: relative;margin: 100px 0">
+		<h2>O Grande Dia</h2>
+		<div class="day-box colleft">
+			<p>A cerim&ocirc;nia e a festa ser&atilde;o realizadas no</p>
+
+			<b>Espa&ccedil;o Gardens</b>
+
+			<p>Av. Queiroz Filho, 830<br>
+				Vila Leopoldina<br>
+				S&atilde;o Paulo - SP</p>
+
+			<b>Data</b>
+
+			<p>9 de Maio de 2015<br>
+				(S&aacute;bado)</p>
+
+			<b>Hor&aacute;rio</b>
+
+			<p>18h30</p>
+
+			<b>RSVP</b>
+
+			<p>Pedimos a gentileza de confirmar a sua presen&ccedil;a<br>
+				at&eacute; o dia 9 de abril de 2015 atrav&eacute;s do telefone<br>(11)99530-4789 ou ent&atilde;o <a class="mylink" href="http://sites.icasei.com.br/daniecaio/rsvp" target="_blank">clicando aqui</a></p>
+		</div>
+		<div class="day-box colright"><div id="map-container"><div id="map-box"></div></div></div>
+	  </div>
+	</section>
+	
+	<section class="module parallax parallax-4">
+	  <div class="img-container">
+		
+	  </div>
+	</section>
+	
+	<section class="module content" id="dicas">
+		<h2>Nossas Dicas</h2>
+		<p style="margin-left: 10%;margin-right: 10%;text-decoration: wavy;font-size: larger;margin-bottom: 30px;text-align:center">Como bons paulistanos que somos (ou nos tornamos!), uma das coisas que mais gostamos de fazer em SP &eacute; experimentar novos restaurantes... Para quem vem de fora, gostar&iacute;amos de sugerir algumas op&ccedil;&otilde;es de lugares para experimentarem um pouquinho do sabor de SP...</p>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle1"></div>
+			<div class="t-text">
+				<h1>Chef Dani recomenda alguns &oacute;timos locais para degustar culin&aacute;ria com influ&ecirc;ncias orientais...</h1>
+				<p><b>Osaka:</b> restaurante nipo-peruano que j&aacute; foi local de muitas comemora&ccedil;&otilde;es do casal. A Dani adora o prato Sakana-Ishiyaki, e o Caio n&atilde;o passa sem a degusta&ccedil;&atilde;o de ceviches. E tudo sempre acompanhado de um bom arroz thai! <i>Rua Amauri, 234 - Itaim - Tel: (11)3073-0234</i></p>
+
+				<p><b>IT Sushi:</b> Sugest&atilde;o para aqueles que s&atilde;o mais adeptos ao estilo "rod&iacute;zio". &Eacute; t&atilde;o bom que o rod&iacute;zio se chama "menu degusta&ccedil;&atilde;o". Provem o Bater&aacute;! <i>R. Pedroso Alvarenga, 1026 - Itaim - Tel: (11)3213-0717</i></p>
+
+				<p><b>Miya:</b> Para ter uma pr&eacute;via da cozinha que servir&aacute; o jantar no nosso casamento, visite o Miya do chef Fl&aacute;vio Miyamura. N&atilde;o deixe de provar o Foie Gras&#160;com doce de leite e risoto de cerveja preta e cebola caramelizada. <i>R. Fradique Coutinho, 47 - Pinheiros &ndash; Tel: (11)2359-8760</i></p>
+			</div>
+
+
+	  	</div>
+
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle2"></div>
+			<div class="t-text">
+				<h1>Sous-chef Caio recomenda mais alguns crowd-pleasers (n&atilde;o tem como errar indo nesses restaurantes!):</h1>
+				<p><b>Italy (italiano):</b> Massas artesanais bem feitas e sem abusos! Aproveite para passear na regi&atilde;o da Oscar Freire antes do jantar. <i>R. Oscar Freire 450 - Jardins Tel: (11)3168-0833</i></p>
+
+				<p><b>Le Jazz (franc&ecirc;s):</b> A entrada de Lula &agrave; Carbonara &eacute; de se repetir v&aacute;rias vezes! Para os saudosos da Fran&ccedil;a, serve um dos melhores pratos de Moules et Frites de S&atilde;o Paulo! <i>Shopping Iguatemi &ndash; Av. Brigadeiro Faria Lima, 2232 &ndash; Itaim &ndash; Tel: (11)3097 - 0133</i></p>
+			</div>
+
+
+		</div>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle3"></div>
+			<div class="t-text">
+				<h1>A m&atilde;e da noiva, C&eacute;lia, especialista em caf&eacute; da manh&atilde; recomenda:</h1>
+				<p><b>Pain et Chocolat:</b> Apesar de pequeno, tem uma otima mesa de p&atilde;es, frutas, bolos, caf&eacute;s e sucos. &Oacute;timo para quem quer tomar caf&eacute; da manh&atilde; ao ar livre! <i>Rua Can&aacute;rio 1301 &ndash; Moema &ndash; Tel: (11)5094-0550</i></p>
+				<h1>O pai da noiva, M&aacute;rio, pescador nato recomenda:</h1>
+				<p><b>Peixaria Bar e Venda:</b> Localizado em um dos principais bairros tur&iacute;sticos da cidade, a Vila Madalena, a peixaria por si s&oacute; j&aacute; rende uma &oacute;tima visita. Como sobremesa, prove as paletas mexicanas no "El Bigod&oacute;n" logo ao lado! <i>Rua In&aacute;cio Pereira da Rocha, 112 &ndash; Vila Madalena &ndash; Tel: (11)2589-3963</i></p>
+			</div>
+
+
+		</div>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle4"></div>
+			<div class="t-text">
+				<h1>Irm&atilde;o (e desenvolvedor desse site!) Marcel recomenda...</h1>
+				<p><b>Hamburgueria Nacional:</b> Melhor hamb&uacute;rguer de S&atilde;o Paulo! N&atilde;o esque&ccedil;am de pedir o molho de wasabi e o milkshake! <i>R. Leopoldo Couto de Magalh&atilde;es J&uacute;nior, 822 &ndash; Itaim &ndash; Tel: (11)3073-0428</i></p>
+
+			</div>
+
+
+		</div>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle5"></div>
+			<div class="t-text">
+				<h1>Os pais do noivo, Marcos e L&uacute;cia recomendam...</h1>
+				<p><b>Ruella Bistrot (franc&ecirc;s):</b> A decora&ccedil;&atilde;o faz parecer que voc&ecirc; realmente est&aacute; na Fran&ccedil;a. Nos lembrou muito da &eacute;poca que visit&aacute;vamos o Caio em Toulouse. Al&eacute;m disso, a comida e atendimento s&atilde;o sensacionais! <i>Rua Jo&atilde;o Cachoeira 1507 &ndash; Vila Ol&iacute;mpia &ndash; Tel: (11)3842-7177</i></p>
+
+			</div>
+
+
+		</div>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle6"></div>
+			<div class="t-text">
+				<h1>Irm&atilde;o e Padrinho Cir&atilde;o recomenda...</h1>
+				<p><b>Tantra:</b> Experi&ecirc;ncia gastron&ocirc;mica bomb&aacute;stica. Parece que voc&ecirc; est&aacute; em outro pa&iacute;s! Restaurante com inspira&ccedil;&atilde;o na culin&aacute;ria da Mong&oacute;lia, s&oacute; que aqui o chef &eacute; voc&ecirc;! Quem nunca quis experimentar curry com tubar&atilde;o? <i>Rua Chilon, 364 &ndash; Vila Ol&iacute;mpia &ndash; Tel: (11)3846-7112</i></p>
+
+			</div>
+
+
+		</div>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle7"></div>
+			<div class="t-text">
+				<h1>Padrinhos Fabi e Gus recomendam...</h1>
+				<p><b>Bar do Alem&atilde;o:</b> tem o fil&eacute; &agrave; parmegiana mais famoso de S&atilde;o Paulo e de Itu! V&aacute; preparado para comer bem... <i>Av. Juriti, 651 - Moema Tel: (11)5052-8333</i></p>
+
+				<p><b>Adega Santiago:</b> esse restaurante de comida ib&eacute;rica &eacute; &oacute;timo para quem gosta de bacalhau! N&atilde;o pule os croquetes de pato como entrada, s&atilde;o uma del&iacute;cia! <i>Rua Sampaio Vidal, 1072 - Jardim Paulistano Tel: (11)3081-5211</i></p>
+
+				<p><b>Insalata:</b> para quem quiser op&ccedil;&otilde;es mais leves, o Insalata tem &oacute;timas combina&ccedil;&otilde;es de saladas com quiches. Mas n&atilde;o se limita a s&oacute; isso! Tem &oacute;timos risotos e sobremesas tamb&eacute;m! <i>Alameda Campinas, 1474 - Jardins Tel: (11)2308-9153</i></p>
+			</div>
+
+
+		</div>
+		<h2>Onde ficar</h2>
+		<p style="margin-left: 10%;margin-right: 10%;text-decoration: wavy;font-size: larger;margin-bottom: 30px">S&atilde;o Paulo tem &oacute;timas op&ccedil;&otilde;es de hospedagem em v&aacute;rios bairros, mas para n&atilde;o ter erro, nada melhor do que dicas de h&oacute;spedes ass&iacute;duos da capital...</p>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle8"></div>
+			<div class="t-text">
+				<h1>Para o pai do noivo, a lista de hot&eacute;is em S&atilde;o Paulo inclui:</h1>
+				<p><b>Grand Hyatt</b> <i>Av. Na&ccedil;&otilde;es Unidas 13301 tel: (11)2838-1234</i> </p>
+
+				<p><b>Hilton S&atilde;o Paulo Morumbi</b> <i>Av. Na&ccedil;&otilde;es Unidas 12901 tel: (11)2845-0000</i> </p>
+				<p><b>Radisson Hotel Faria Lima</b><i> Av. Cidade Jardim 625 tel: (11)2133-5960</i> </p>
+
+
+			</div>
+
+
+		</div>
+		<div class="tips-row">
+
+
+			<div class="t-image tcircle9" ></div>
+			<div class="t-text" style="margin-top: 50px">
+
+				<h1>Austin, cachorrinho da fam&iacute;lia do noivo, tamb&eacute;m tem a vez!</h1>
+				<p>Se voc&ecirc; viaja com um cachorrinho, considere o Tryp. Eles s&atilde;o pet-friendly e sempre me receberam muito bem quando eu vou visitar o meu irm&atilde;o! <i>Rua Jesu&iacute;no Arruda 806, (11)3704-4400</i></p>
+
+
+
+
+			</div>
+
+
+		</div>
+	</section>
+	
+	<section class="module parallax parallax-5">
+	  <div class="img-container">
+		
+	  </div>
+	</section>
+	
+	<section class="module content" id="lista">
+	  <div class="p-container" style="margin: 80px 0">
+		<h2>Lista de Presentes</h2>
+		<p>A nossa lista de presentes pode ser acessada abaixo</p>
+		<a href="https://sites.icasei.com.br/daniecaio/pt_br/store/redirect/9?ccode=BR&id_loja=2" target="_blank"><img class="present" src="images/present.png"></a>
+		<p><a class="mylink" href="https://sites.icasei.com.br/daniecaio/pt_br/store/redirect/9?ccode=BR&id_loja=2" target="_blank" style="padding: 5px 10px">Clique aqui</a></p>
+	  </div>
+	</section>
+
+	<section class="module parallax parallax-7">
+		<div class="img-container">
+
+		</div>
+	</section>
+
+	<section class="module content" style="padding: 20px 10px;display: flex;position: relative">
+		<div class="faixa"><p class="dias"></p></div>
+		<h6 style="position: absolute;right: 20px;bottom: 5px;">Desenvolvido por Marcel Makoto Kondo</h6>
+	</section>
+	<script type="text/javascript" src="nossa-historia.js"></script>
+	
+</body>
+</html>

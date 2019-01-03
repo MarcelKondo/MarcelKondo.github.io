@@ -29,10 +29,7 @@
 	font-family: "abraham";
 	src: url("fonts/AbrahamLincoln.ttf");
 }
-body{
-	height: 100%;
-	overflow: hidden;
-}
+
 
 /*#loading-page{
 	background-color: #ffffff;
